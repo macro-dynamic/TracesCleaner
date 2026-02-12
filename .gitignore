@@ -1,0 +1,7 @@
+# .gitignore
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+node_modules/
+.env

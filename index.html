@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TracesCleaner — Remove AI Watermarks Instantly</title>
+    <meta name="description" content="Free tool to detect and remove invisible AI watermarks, hidden Unicode characters, and metadata from AI-generated text. Works with ChatGPT, Claude, Gemini, Copilot, DeepSeek & more. 100% private — runs in your browser.">
+    <meta name="keywords" content="AI watermark remover, remove AI watermarks, invisible characters, zero-width space, ChatGPT watermark, Claude watermark, AI text cleaner, unicode cleaner">
+    <meta name="author" content="TracesCleaner">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://tracescleaner.github.io/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tracescleaner.github.io/">
+    <meta property="og:title" content="TracesCleaner — Remove AI Watermarks Instantly">
+    <meta property="og:description" content="Free tool to detect and remove invisible AI watermarks from text. Works with all major AI models. 100% private — nothing leaves your browser.">
+    <meta property="og:image" content="https://tracescleaner.github.io/img/og-image.svg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="TracesCleaner — Remove AI Watermarks Instantly">
+    <meta name="twitter:description" content="Free tool to detect and remove invisible AI watermarks from text. Works with ChatGPT, Claude, Gemini & more.">
+    <meta name="twitter:image" content="https://tracescleaner.github.io/img/og-image.svg">
+
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0a0a0f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="img/icon.svg">
+    <link rel="icon" type="image/svg+xml" href="img/icon.svg">
+
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">🧹</span>
+                <span class="logo-text">TracesCleaner</span>
+            </a>
+            <div class="nav-links">
+                <a href="invisible-chars.html">Invisible Characters</a>
+                <a href="statistical-watermarks.html">Statistical Watermarks</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="hero">
+        <div class="container">
+            <h1>Remove AI Watermarks <span class="highlight">Instantly</span></h1>
+            <p class="subtitle">
+                TracesCleaner detects and removes hidden metadata, invisible Unicode characters,
+                and AI watermarks from generated text — making your content clean and untraceable.
+            </p>
+
+            <div class="stats-bar">
+                <div class="stat">
+                    <span class="stat-icon">🔍</span>
+                    <span class="stat-text">Detects <strong>50+ invisible character types</strong></span>
+                </div>
+                <div class="stat">
+                    <span class="stat-icon">⚡</span>
+                    <span class="stat-text">Instant <strong>client-side processing</strong></span>
+                </div>
+                <div class="stat">
+                    <span class="stat-icon">🔒</span>
+                    <span class="stat-text"><strong>100% private</strong> — nothing leaves your browser</span>
+                </div>
+            </div>
+
+            <div class="app-card">
+                <div class="tabs">
+                    <button class="tab active" data-tab="clean">Clean Text</button>
+                    <button class="tab" data-tab="reveal">Reveal Hidden Characters</button>
+                    <button class="tab" data-tab="inject">Inject Watermark (Demo)</button>
+                </div>
+
+                <!-- Clean Tab -->
+                <div class="tab-content active" id="tab-clean">
+                    <div class="input-header">
+                        <label for="input-clean" class="input-label">Paste your text here:</label>
+                        <span id="live-count" class="live-count hidden">0 hidden characters found</span>
+                    </div>
+                    <textarea id="input-clean" class="text-input" rows="10" placeholder="Paste AI-generated text here to detect and remove invisible watermarks..."></textarea>
+
+                    <div class="controls">
+                        <div class="options">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="opt-invisible" checked>
+                                <span class="checkmark"></span>
+                                Strip invisible characters
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="opt-normalize" checked>
+                                <span class="checkmark"></span>
+                                Normalize Unicode (NFC)
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="opt-homoglyphs" checked>
+                                <span class="checkmark"></span>
+                                Fix homoglyph substitutions
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="opt-strip-html">
+                                <span class="checkmark"></span>
+                                Strip HTML tags (web copy-paste)
+                            </label>
+                        </div>
+                        <button id="btn-clean" class="btn btn-primary">
+                            <span class="btn-icon">🧹</span> Clean Text
+                        </button>
+                    </div>
+
+                    <div id="results-clean" class="results hidden">
+                        <div class="results-header">
+                            <h3>Cleaning Results</h3>
+                            <div class="results-badges">
+                                <span id="badge-invisible" class="badge badge-danger hidden">
+                                    <span class="badge-count">0</span> invisible chars
+                                </span>
+                                <span id="badge-homoglyphs" class="badge badge-warning hidden">
+                                    <span class="badge-count">0</span> homoglyphs
+                                </span>
+                                <span id="badge-whitespace" class="badge badge-info hidden">
+                                    <span class="badge-count">0</span> whitespace anomalies
+                                </span>
+                                <span id="badge-clean" class="badge badge-success hidden">
+                                    ✓ Text is clean
+                                </span>
+                            </div>
+                        </div>
+
+                        <div id="detection-details" class="detection-details hidden">
+                            <h4>Detected Watermarks:</h4>
+                            <div id="detection-list" class="detection-list"></div>
+                        </div>
+
+                        <div id="annotated-result" class="annotated-result hidden">
+                            <div class="annotated-header">
+                                <h4>Result:</h4>
+                                <div class="annotated-actions">
+                                    <span id="annotated-count" class="badge badge-danger">0 hidden characters found</span>
+                                    <button id="btn-copy-clean" class="btn-copy-inline">
+                                        <span>📋</span> Copy
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="annotated-text" class="revealed-text"></div>
+                        </div>
+
+                        <label class="input-label">Cleaned text:</label>
+                        <textarea id="output-clean" class="text-input text-output" rows="8" readonly></textarea>
+                        <div class="output-actions">
+                            <button id="btn-copy" class="btn btn-secondary">
+                                <span class="btn-icon">📋</span> Copy to Clipboard
+                            </button>
+                            <span id="copy-status" class="copy-status hidden">✓ Copied!</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reveal Tab -->
+                <div class="tab-content" id="tab-reveal">
+                    <label for="input-reveal" class="input-label">Paste text to reveal hidden characters:</label>
+                    <textarea id="input-reveal" class="text-input" rows="10" placeholder="Paste text here to see all hidden Unicode characters highlighted..."></textarea>
+
+                    <div class="controls">
+                        <button id="btn-reveal" class="btn btn-primary">
+                            <span class="btn-icon">🔍</span> Reveal Hidden Characters
+                        </button>
+                    </div>
+
+                    <div id="results-reveal" class="results hidden">
+                        <div class="results-header">
+                            <h3>Character Analysis</h3>
+                            <span id="reveal-count" class="badge badge-info">0 hidden characters found</span>
+                        </div>
+                        <div id="revealed-text" class="revealed-text"></div>
+                        <div id="char-breakdown" class="char-breakdown"></div>
+                    </div>
+                </div>
+
+                <!-- Inject Tab -->
+                <div class="tab-content" id="tab-inject">
+                    <div class="demo-notice">
+                        <span class="notice-icon">⚠️</span>
+                        <p><strong>Demo Mode:</strong> This injects invisible watermark characters into text so you can see how AI watermarking works, then use the "Clean Text" tab to remove them.</p>
+                    </div>
+                    <label for="input-inject" class="input-label">Enter text to watermark:</label>
+                    <textarea id="input-inject" class="text-input" rows="6" placeholder="Type or paste clean text here..."></textarea>
+
+                    <div class="controls">
+                        <div class="options">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="opt-zwsp" checked>
+                                <span class="checkmark"></span>
+                                Zero-width spaces (U+200B)
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="opt-zwnj" checked>
+                                <span class="checkmark"></span>
+                                Zero-width non-joiners (U+200C)
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="opt-bom">
+                                <span class="checkmark"></span>
+                                Byte Order Marks (U+FEFF)
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="opt-invis-sep">
+                                <span class="checkmark"></span>
+                                Invisible operators (U+2061-U+2064)
+                            </label>
+                        </div>
+                        <button id="btn-inject" class="btn btn-warning">
+                            <span class="btn-icon">💉</span> Inject Watermark
+                        </button>
+                    </div>
+
+                    <div id="results-inject" class="results hidden">
+                        <div class="results-header">
+                            <h3>Watermarked Text</h3>
+                            <span id="inject-count" class="badge badge-danger">0 characters injected</span>
+                        </div>
+                        <textarea id="output-inject" class="text-input text-output" rows="6" readonly></textarea>
+                        <p class="inject-hint">
+                            The text above looks identical but contains hidden characters.
+                            Copy it and paste into the <strong>"Reveal"</strong> or <strong>"Clean"</strong> tab to see them!
+                        </p>
+                        <div class="output-actions">
+                            <button id="btn-copy-inject" class="btn btn-secondary">
+                                <span class="btn-icon">📋</span> Copy Watermarked Text
+                            </button>
+                            <span id="copy-inject-status" class="copy-status hidden">✓ Copied!</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-cards">
+                <a href="invisible-chars.html" class="info-card">
+                    <div class="info-card-icon">👻</div>
+                    <h3>Invisible Characters</h3>
+                    <p>Learn about zero-width spaces, BOM marks, and other hidden Unicode characters used for AI watermarking.</p>
+                    <span class="info-card-link">Learn more →</span>
+                </a>
+                <a href="statistical-watermarks.html" class="info-card">
+                    <div class="info-card-icon">📊</div>
+                    <h3>Statistical Watermarks</h3>
+                    <p>Understand how AI models embed statistical patterns in token selection that survive simple text edits.</p>
+                    <span class="info-card-link">Learn more →</span>
+                </a>
+            </div>
+
+            <!-- AI Compatibility Section -->
+            <div class="ai-compat-section">
+                <h2 class="section-title">Works With <span class="highlight">All Major AI</span></h2>
+                <p class="section-subtitle">TracesCleaner detects and removes invisible character watermarks from every major AI model and platform.</p>
+                <div id="ai-compat-grid" class="ai-compat-grid"></div>
+                <div class="compat-legend">
+                    <div class="legend-item"><span class="legend-dot legend-full"></span> Full removal (invisible chars)</div>
+                    <div class="legend-item"><span class="legend-dot legend-partial"></span> Partial (statistical watermarks need paraphrasing)</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <span class="logo-icon">🧹</span>
+                    <span>TracesCleaner</span>
+                </div>
+                <div class="footer-links">
+                    <a href="invisible-chars.html">Invisible Characters</a>
+                    <a href="statistical-watermarks.html">Statistical Watermarks</a>
+                </div>
+                <div class="footer-right">
+                    <p>All processing happens locally in your browser. No data is sent to any server.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/watermark-detector.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js').catch(() => {});
+        }
+    </script>
+</body>
+</html>

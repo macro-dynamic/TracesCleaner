@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistical Watermarks in AI Text — TracesCleaner</title>
+    <meta name="description" content="Understand how AI models embed statistical watermarks in text through token distribution, entropy manipulation, and n-gram patterns.">
+    <meta property="og:title" content="Statistical Watermarks in AI Text — TracesCleaner">
+    <meta property="og:description" content="Understand how AI models embed statistical watermarks and what can be done about them.">
+    <meta property="og:url" content="https://tracescleaner.github.io/statistical-watermarks.html">
+    <meta property="og:image" content="https://tracescleaner.github.io/img/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="theme-color" content="#0a0a0f">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧹</text></svg>">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">🧹</span>
+                <span class="logo-text">TracesCleaner</span>
+            </a>
+            <div class="nav-links">
+                <a href="invisible-chars.html">Invisible Characters</a>
+                <a href="statistical-watermarks.html" style="color: var(--accent-light);">Statistical Watermarks</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="page-content">
+        <div class="container">
+            <a href="index.html" class="back-link">← Back to cleaner</a>
+
+            <h1>Statistical <span class="highlight">Watermarks</span> in AI Text</h1>
+            <p class="subtitle">
+                Statistical watermarks are sophisticated patterns embedded in AI-generated text that are invisible to the naked eye
+                but can be detected through statistical analysis. Unlike invisible characters, these watermarks are built into the
+                pattern of word and token choices themselves.
+            </p>
+
+            <h2>How Statistical Watermarking Works</h2>
+            <p>
+                When large language models generate text, they can subtly alter their token selection process to create
+                statistical patterns. Here are the main techniques used:
+            </p>
+
+            <h3>1. Token Distribution Watermarks</h3>
+            <p>
+                The model splits its vocabulary into "green" and "red" lists using a secret key. During generation,
+                it slightly biases token selection toward the green list. This creates a detectable pattern: watermarked
+                text contains statistically more green-list tokens than natural text would.
+            </p>
+            <div class="code-block">
+<strong>How it works:</strong>
+1. For each token position, a hash function (using a secret key + previous tokens)
+   splits the vocabulary into "green" and "red" lists
+2. The model adds a small bias δ to green-list token logits
+3. The resulting text has more green tokens than expected by chance
+4. A detector with the same key checks if the green-token ratio is anomalous
+
+<strong>Detection:</strong>
+z-score = (green_count - expected) / sqrt(variance)
+If z-score > threshold → watermark detected
+            </div>
+
+            <h3>2. Entropy Manipulation</h3>
+            <p>
+                The randomness (entropy) of certain word choices is subtly altered to encode information.
+                In high-entropy positions (where many tokens are equally likely), the model can make specific
+                choices without noticeably affecting quality. These choices encode watermark bits.
+            </p>
+
+            <h3>3. N-gram Pattern Signatures</h3>
+            <p>
+                Specific sequences of words (n-grams) appear with slightly different frequencies than would
+                naturally occur. These frequency deviations form a signature that can be detected statistically
+                but are imperceptible to human readers.
+            </p>
+
+            <h2>Why Simple Cleaning Methods Fail</h2>
+            <p>
+                Statistical watermarks cannot be removed by regex, character stripping, or simple text manipulation because:
+            </p>
+            <ul>
+                <li>They exist in the <strong>statistical properties</strong> of the text itself, not in hidden characters</li>
+                <li>They're <strong>distributed across the entire text</strong>, not concentrated in specific locations</li>
+                <li>The patterns are <strong>designed to be robust</strong> against minor edits — changing a few words or reordering sentences won't remove them</li>
+                <li>Detection uses <strong>statistical tests</strong> (z-scores) that remain significant even after partial modification</li>
+            </ul>
+
+            <h2>How to Remove Statistical Watermarks</h2>
+            <p>
+                The only reliable way to remove statistical watermarks is to <strong>substantially rewrite the text</strong>
+                while preserving meaning. This effectively creates new token sequences that don't carry the original
+                statistical fingerprint. Approaches include:
+            </p>
+            <ul>
+                <li><strong>Full paraphrasing:</strong> Rewriting sentences with different word choices and structures</li>
+                <li><strong>Translation round-tripping:</strong> Translating to another language and back disrupts token patterns</li>
+                <li><strong>Structural reorganization:</strong> Changing paragraph order, combining or splitting sentences</li>
+                <li><strong>Vocabulary substitution:</strong> Systematically replacing words with synonyms across the text</li>
+            </ul>
+
+            <div style="background: var(--warning-bg); border: 1px solid rgba(253,203,110,0.3); border-radius: var(--radius-sm); padding: 1.25rem; margin: 1.5rem 0;">
+                <p style="color: var(--warning); margin: 0;">
+                    <strong>Important:</strong> TracesCleaner focuses on removing invisible character watermarks, which can be
+                    done perfectly and instantly. Statistical watermarks require AI-powered paraphrasing that fundamentally
+                    changes the text. We're transparent about this distinction — no tool can guarantee 100% removal of
+                    statistical watermarks without significantly altering the text.
+                </p>
+            </div>
+
+            <h2>Known Statistical Watermarking Implementations</h2>
+            <table class="char-table">
+                <thead>
+                    <tr>
+                        <th>Method</th>
+                        <th>Technique</th>
+                        <th>Robustness</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Green/Red List (Kirchenbauer et al.)</td>
+                        <td>Token vocabulary partitioning with bias</td>
+                        <td>Moderate — vulnerable to paraphrasing</td>
+                    </tr>
+                    <tr>
+                        <td>Unigram Watermark</td>
+                        <td>Context-independent token biasing</td>
+                        <td>Lower — easier to disrupt</td>
+                    </tr>
+                    <tr>
+                        <td>Distortion-Free (Christ et al.)</td>
+                        <td>Rejection sampling to embed signal</td>
+                        <td>High — hard to detect and remove</td>
+                    </tr>
+                    <tr>
+                        <td>SynthID (Google DeepMind)</td>
+                        <td>Tournament-based sampling</td>
+                        <td>High — designed for production use</td>
+                    </tr>
+                    <tr>
+                        <td>Entropy-Based</td>
+                        <td>Encodes bits at high-entropy positions</td>
+                        <td>Moderate — depends on text entropy</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>What TracesCleaner Does</h2>
+            <p>
+                While we can't rewrite your text (that would change its meaning), TracesCleaner provides:
+            </p>
+            <ul>
+                <li><strong>Complete invisible character removal</strong> — strips all hidden Unicode watermarks instantly</li>
+                <li><strong>Homoglyph detection</strong> — identifies look-alike character substitutions (Cyrillic/Greek letters replacing Latin ones)</li>
+                <li><strong>Unicode normalization</strong> — ensures consistent character encoding (NFC normalization)</li>
+                <li><strong>Educational awareness</strong> — helps you understand what watermarking techniques exist</li>
+            </ul>
+            <p>
+                For statistical watermark removal, we recommend paraphrasing the text manually or using a dedicated
+                paraphrasing tool, then running it through TracesCleaner to strip any remaining invisible characters.
+            </p>
+
+            <div style="margin-top: 2rem;">
+                <a href="index.html" class="btn btn-primary" style="display: inline-flex; text-decoration: none;">
+                    <span class="btn-icon">🧹</span> Clean Your Text Now
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <span class="logo-icon">🧹</span>
+                    <span>TracesCleaner</span>
+                </div>
+                <div class="footer-links">
+                    <a href="invisible-chars.html">Invisible Characters</a>
+                    <a href="statistical-watermarks.html">Statistical Watermarks</a>
+                </div>
+                <div class="footer-right">
+                    <p>All processing happens locally in your browser. No data is sent to any server.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

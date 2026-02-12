@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a1a"/>
+      <stop offset="50%" style="stop-color:#1a1a3e"/>
+      <stop offset="100%" style="stop-color:#0a0a1a"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#6c5ce7"/>
+      <stop offset="100%" style="stop-color:#a855f7"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <!-- Decorative grid dots -->
+  <g fill="#6c5ce7" opacity="0.08">
+    <circle cx="100" cy="100" r="3"/><circle cx="200" cy="100" r="3"/><circle cx="300" cy="100" r="3"/>
+    <circle cx="400" cy="100" r="3"/><circle cx="500" cy="100" r="3"/><circle cx="600" cy="100" r="3"/>
+    <circle cx="100" cy="200" r="3"/><circle cx="200" cy="200" r="3"/><circle cx="300" cy="200" r="3"/>
+    <circle cx="400" cy="200" r="3"/><circle cx="500" cy="200" r="3"/><circle cx="600" cy="200" r="3"/>
+    <circle cx="100" cy="300" r="3"/><circle cx="200" cy="300" r="3"/><circle cx="300" cy="300" r="3"/>
+    <circle cx="400" cy="300" r="3"/><circle cx="500" cy="300" r="3"/><circle cx="600" cy="300" r="3"/>
+    <circle cx="700" cy="100" r="3"/><circle cx="800" cy="100" r="3"/><circle cx="900" cy="100" r="3"/>
+    <circle cx="700" cy="200" r="3"/><circle cx="800" cy="200" r="3"/><circle cx="900" cy="200" r="3"/>
+    <circle cx="700" cy="300" r="3"/><circle cx="800" cy="300" r="3"/><circle cx="900" cy="300" r="3"/>
+  </g>
+  <!-- Icon -->
+  <g transform="translate(160,200) scale(0.45)">
+    <circle cx="0" cy="0" r="100" fill="none" stroke="#a855f7" stroke-width="24"/>
+    <line x1="72" y1="72" x2="140" y2="140" stroke="#a855f7" stroke-width="28" stroke-linecap="round"/>
+    <circle cx="0" cy="0" r="22" fill="#a855f7" opacity="0.6"/>
+  </g>
+  <!-- Title -->
+  <text x="320" y="280" font-family="system-ui,-apple-system,sans-serif" font-size="72" font-weight="bold" fill="#ffffff">TracesCleaner</text>
+  <!-- Subtitle -->
+  <text x="320" y="340" font-family="system-ui,-apple-system,sans-serif" font-size="28" fill="#a0a0c0">Detect &amp; Remove AI Watermarks from Text</text>
+  <!-- Feature pills -->
+  <g transform="translate(320,390)">
+    <rect x="0" y="0" width="180" height="40" rx="20" fill="url(#accent)" opacity="0.2" stroke="#6c5ce7" stroke-width="1"/>
+    <text x="90" y="26" text-anchor="middle" font-family="system-ui,sans-serif" font-size="16" fill="#a855f7">70+ Hidden Chars</text>
+    <rect x="200" y="0" width="180" height="40" rx="20" fill="url(#accent)" opacity="0.2" stroke="#6c5ce7" stroke-width="1"/>
+    <text x="290" y="26" text-anchor="middle" font-family="system-ui,sans-serif" font-size="16" fill="#a855f7">All AI Models</text>
+    <rect x="400" y="0" width="180" height="40" rx="20" fill="url(#accent)" opacity="0.2" stroke="#6c5ce7" stroke-width="1"/>
+    <text x="490" y="26" text-anchor="middle" font-family="system-ui,sans-serif" font-size="16" fill="#a855f7">100% Free</text>
+  </g>
+  <!-- Bottom accent line -->
+  <rect x="0" y="620" width="1200" height="10" fill="url(#accent)"/>
+</svg>

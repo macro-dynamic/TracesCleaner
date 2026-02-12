@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invisible Characters in AI Text — TracesCleaner</title>
+    <meta name="description" content="Learn about invisible Unicode characters used for AI watermarking — zero-width spaces, BOM marks, variation selectors, and how to remove them.">
+    <meta property="og:title" content="Invisible Characters in AI Text — TracesCleaner">
+    <meta property="og:description" content="Learn about invisible Unicode characters used for AI watermarking and how to remove them.">
+    <meta property="og:url" content="https://tracescleaner.github.io/invisible-chars.html">
+    <meta property="og:image" content="https://tracescleaner.github.io/img/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="theme-color" content="#0a0a0f">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧹</text></svg>">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">🧹</span>
+                <span class="logo-text">TracesCleaner</span>
+            </a>
+            <div class="nav-links">
+                <a href="invisible-chars.html" style="color: var(--accent-light);">Invisible Characters</a>
+                <a href="statistical-watermarks.html">Statistical Watermarks</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="page-content">
+        <div class="container">
+            <a href="index.html" class="back-link">← Back to cleaner</a>
+
+            <h1>Invisible Characters in <span class="highlight">AI Text</span></h1>
+            <p class="subtitle">
+                Invisible characters are Unicode codepoints that take up space in text but remain unseen to the human eye.
+                These characters can be embedded in text for various purposes, including watermarking AI-generated content.
+            </p>
+
+            <h2>Common Types of Invisible Characters</h2>
+
+            <table class="char-table">
+                <thead>
+                    <tr>
+                        <th>Character</th>
+                        <th>Code Point</th>
+                        <th>Category</th>
+                        <th>Common Use</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Zero-Width Space</td>
+                        <td class="mono">U+200B</td>
+                        <td>Zero-width</td>
+                        <td>Word-breaking in CJK languages; watermarking</td>
+                    </tr>
+                    <tr>
+                        <td>Zero-Width Non-Joiner</td>
+                        <td class="mono">U+200C</td>
+                        <td>Zero-width</td>
+                        <td>Prevents ligature formation; watermarking</td>
+                    </tr>
+                    <tr>
+                        <td>Zero-Width Joiner</td>
+                        <td class="mono">U+200D</td>
+                        <td>Zero-width</td>
+                        <td>Causes ligature/emoji joining; watermarking</td>
+                    </tr>
+                    <tr>
+                        <td>Left-to-Right Mark</td>
+                        <td class="mono">U+200E</td>
+                        <td>Direction</td>
+                        <td>Bidirectional text control</td>
+                    </tr>
+                    <tr>
+                        <td>Right-to-Left Mark</td>
+                        <td class="mono">U+200F</td>
+                        <td>Direction</td>
+                        <td>Bidirectional text control</td>
+                    </tr>
+                    <tr>
+                        <td>Word Joiner</td>
+                        <td class="mono">U+2060</td>
+                        <td>Joiner</td>
+                        <td>Prevents line breaks; watermarking</td>
+                    </tr>
+                    <tr>
+                        <td>Function Application</td>
+                        <td class="mono">U+2061</td>
+                        <td>Math invisible</td>
+                        <td>Mathematical notation; watermarking</td>
+                    </tr>
+                    <tr>
+                        <td>Invisible Times</td>
+                        <td class="mono">U+2062</td>
+                        <td>Math invisible</td>
+                        <td>Mathematical notation; watermarking</td>
+                    </tr>
+                    <tr>
+                        <td>Invisible Separator</td>
+                        <td class="mono">U+2063</td>
+                        <td>Math invisible</td>
+                        <td>Mathematical notation; watermarking</td>
+                    </tr>
+                    <tr>
+                        <td>Invisible Plus</td>
+                        <td class="mono">U+2064</td>
+                        <td>Math invisible</td>
+                        <td>Mathematical notation; watermarking</td>
+                    </tr>
+                    <tr>
+                        <td>Byte Order Mark (BOM)</td>
+                        <td class="mono">U+FEFF</td>
+                        <td>BOM</td>
+                        <td>Text encoding marker; watermarking</td>
+                    </tr>
+                    <tr>
+                        <td>Soft Hyphen</td>
+                        <td class="mono">U+00AD</td>
+                        <td>Format</td>
+                        <td>Hyphenation hints; watermarking</td>
+                    </tr>
+                    <tr>
+                        <td>Mongolian Vowel Separator</td>
+                        <td class="mono">U+180E</td>
+                        <td>Format</td>
+                        <td>Mongolian script; watermarking</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>How Invisible Characters Are Used for Watermarking</h2>
+            <p>
+                AI providers and content platforms may insert specific patterns of invisible characters into text to:
+            </p>
+            <ul>
+                <li><strong>Track the origin</strong> of AI-generated content back to a specific model, API key, or user session</li>
+                <li><strong>Detect</strong> when content has been created by their systems, even after minor modifications</li>
+                <li><strong>Create a unique signature</strong> — a digital fingerprint within the text that encodes metadata like timestamps, user IDs, or model versions</li>
+            </ul>
+            <p>
+                The technique works by inserting invisible characters in specific patterns — for example, encoding a binary string where
+                a zero-width space represents "1" and a zero-width non-joiner represents "0". This creates an invisible binary message
+                woven throughout the text.
+            </p>
+
+            <h3>Example: Watermarked vs. Clean Text</h3>
+            <div class="code-label">Watermarked text (invisible chars shown in brackets):</div>
+            <div class="code-block">This<span style="color: var(--danger);">[U+200B]</span> is<span style="color: var(--danger);">[U+200C]</span> an<span style="color: var(--danger);">[U+2061]</span> example<span style="color: var(--danger);">[U+200B]</span> of<span style="color: var(--danger);">[U+2063]</span> watermarked<span style="color: var(--danger);">[U+200C]</span> text<span style="color: var(--danger);">[U+FEFF]</span> that<span style="color: var(--danger);">[U+200B]</span> looks<span style="color: var(--danger);">[U+2062]</span> completely<span style="color: var(--danger);">[U+200C]</span> normal.</div>
+
+            <div class="code-label">Clean text (after removal):</div>
+            <div class="code-block">This is an example of watermarked text that looks completely normal.</div>
+
+            <h2>How TracesCleaner Helps</h2>
+            <p>
+                TracesCleaner automatically detects and strips all invisible character metadata from your text, including:
+            </p>
+            <ul>
+                <li>All <strong>zero-width characters</strong> (U+200B through U+200F)</li>
+                <li><strong>Byte Order Marks</strong> (U+FEFF)</li>
+                <li>All <strong>invisible math operators</strong> (U+2060 through U+2064)</li>
+                <li>All <strong>directional formatting characters</strong> (U+202A through U+202E, U+2066 through U+2069)</li>
+                <li><strong>Variation selectors</strong> (U+FE00 through U+FE0F)</li>
+                <li>All <strong>C0 and C1 control characters</strong></li>
+                <li>Plus <strong>40+ additional</strong> invisible or format-control Unicode characters</li>
+            </ul>
+            <p>
+                All processing happens entirely in your browser — no text is ever sent to a server.
+            </p>
+
+            <div style="margin-top: 2rem;">
+                <a href="index.html" class="btn btn-primary" style="display: inline-flex; text-decoration: none;">
+                    <span class="btn-icon">🧹</span> Clean Your Text Now
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <span class="logo-icon">🧹</span>
+                    <span>TracesCleaner</span>
+                </div>
+                <div class="footer-links">
+                    <a href="invisible-chars.html">Invisible Characters</a>
+                    <a href="statistical-watermarks.html">Statistical Watermarks</a>
+                </div>
+                <div class="footer-right">
+                    <p>All processing happens locally in your browser. No data is sent to any server.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
