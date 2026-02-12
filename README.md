@@ -4,7 +4,7 @@
 
 A free, privacy-first tool that finds and removes hidden Unicode characters, zero-width spaces, and other invisible watermarks that AI models embed in generated text.
 
-🔗 **Live Demo:** [https://esr0teck.me/TracesCleaner/](https://esr0teck.me/TracesCleaner/)
+🔗 **Live Demo:** [https://macro-dynamic.github.io/TracesCleaner/](https://macro-dynamic.github.io/TracesCleaner/)
 
 ---
 
