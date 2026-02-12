@@ -1,15 +1,15 @@
 const CACHE_NAME = 'tracescleaner-v1';
 const ASSETS = [
-    '/',
-    '/index.html',
-    '/invisible-chars.html',
-    '/statistical-watermarks.html',
-    '/css/styles.css',
-    '/js/watermark-detector.js',
-    '/js/app.js',
-    '/manifest.json',
-    '/img/icon.svg',
-    '/img/og-image.svg',
+    './',
+    './index.html',
+    './invisible-chars.html',
+    './statistical-watermarks.html',
+    './css/styles.css',
+    './js/watermark-detector.js',
+    './js/app.js',
+    './manifest.json',
+    './img/icon.svg',
+    './img/og-image.svg',
 ];
 
 // Install — cache core assets
@@ -45,7 +45,7 @@ self.addEventListener('fetch', (event) => {
         }).catch(() => {
             // Offline fallback
             if (event.request.destination === 'document') {
-                return caches.match('/index.html');
+                return caches.match('./index.html');
             }
         })
     );

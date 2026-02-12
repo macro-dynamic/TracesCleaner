@@ -2,7 +2,7 @@
     "name": "TracesCleaner",
     "short_name": "TracesCleaner",
     "description": "Detect and remove invisible AI watermarks from text. Works with ChatGPT, Claude, Gemini & more. 100% private.",
-    "start_url": "/",
+    "start_url": "./",
     "display": "standalone",
     "background_color": "#0a0a0f",
     "theme_color": "#0a0a0f",
